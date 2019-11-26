@@ -36,6 +36,8 @@ function love.load()
 
     love.window.setTitle('Game of YUT')
 
+    player1_1 = Player(525, 525, 50, 50)
+
     gameState = 'start'
 
     
@@ -87,12 +89,11 @@ end
 
 -- called every frame, with dt passed in as delta in time since last frame
 function love.update(dt)
-    Board:update(dt)
     love.keyboard.keysPressed = {}
     love.keyboard.keysReleased = {}
 end
 
-
+local i = 0
 -- called each frame, used to render to the screen
 function love.draw()
     -- begin virtual resolution drawing
@@ -101,16 +102,19 @@ function love.draw()
     -- clear screen using Mario background blue
     love.graphics.clear(108/255, 140/255, 255/255, 255/255)
 
+    player1_1:render()
+
     love.graphics.setFont(mid_font)
 
     love.graphics.printf('Hold Space to Mix', 300, 100 , VIRTUAL_WIDTH, 'center')
     
     local c = 0
+    
     love.graphics.setFont(big_font)
     Board:render()
 
     if love.keyboard.isDown('space') then
-        Yut:mix()
+        i = Yut:mix()
     else
         c = 1
     end
