@@ -5,7 +5,7 @@ yut2 = 0
 yut3 = 0
 yut4 = 0
 
-spritesheet = love.graphics.newImage('sprite.png')
+spritesheet = love.graphics.newImage('graphics/sprite.png')
 tiles={}
 FRONT = love.graphics.newQuad(0,0,32,32,spritesheet:getDimensions())
 BACK = love.graphics.newQuad(32,0,32,32,spritesheet:getDimensions())
