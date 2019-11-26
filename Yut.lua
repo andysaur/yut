@@ -5,16 +5,46 @@ yut2 = 0
 yut3 = 0
 yut4 = 0
 
+spritesheet = love.graphics.newImage('sprite.png')
+tiles={}
+FRONT = love.graphics.newQuad(0,0,32,32,spritesheet:getDimensions())
+BACK = love.graphics.newQuad(32,0,32,32,spritesheet:getDimensions())
+BACKDO = love.graphics.newQuad(0,32,32,32,spritesheet:getDimensions())
+
 function Yut:mix()
     yut1 = math.random(2) - 1
     yut2 = math.random(2) - 1
     yut3 = math.random(2) - 1
     yut4 = math.random(2) - 1
 
-    love.graphics.printf(yut1, 200, VIRTUAL_HEIGHT / 2 - 60 , VIRTUAL_WIDTH, 'center')
-    love.graphics.printf(yut2, 250, VIRTUAL_HEIGHT / 2 - 60 , VIRTUAL_WIDTH, 'center')
-    love.graphics.printf(yut3, 300, VIRTUAL_HEIGHT / 2 - 60 , VIRTUAL_WIDTH, 'center')
-    love.graphics.printf(yut4, 350, VIRTUAL_HEIGHT / 2 - 60 , VIRTUAL_WIDTH, 'center')
+    --love.graphics.printf(yut1, 200, VIRTUAL_HEIGHT / 2 - 60 , VIRTUAL_WIDTH, 'center')
+    --love.graphics.printf(yut2, 250, VIRTUAL_HEIGHT / 2 - 60 , VIRTUAL_WIDTH, 'center')
+    --love.graphics.printf(yut3, 300, VIRTUAL_HEIGHT / 2 - 60 , VIRTUAL_WIDTH, 'center')
+    --love.graphics.printf(yut4, 350, VIRTUAL_HEIGHT / 2 - 60 , VIRTUAL_WIDTH, 'center')
+
+    if yut1 == 0 then
+        love.graphics.draw(spritesheet, FRONT, 650, VIRTUAL_HEIGHT / 2 - 60)
+    else
+        love.graphics.draw(spritesheet, BACKDO,650, VIRTUAL_HEIGHT / 2 - 60)
+    end
+
+    if yut2 == 0 then
+        love.graphics.draw(spritesheet, FRONT,700, VIRTUAL_HEIGHT / 2 - 60)
+    else
+        love.graphics.draw(spritesheet, BACK,700, VIRTUAL_HEIGHT / 2 - 60)
+    end
+
+    if yut3 == 0 then
+        love.graphics.draw(spritesheet, FRONT,750, VIRTUAL_HEIGHT / 2 - 60)
+    else
+        love.graphics.draw(spritesheet, BACK,750, VIRTUAL_HEIGHT / 2 - 60)
+    end
+
+    if yut4 == 0 then
+        love.graphics.draw(spritesheet, FRONT,800, VIRTUAL_HEIGHT / 2 - 60)
+    else
+        love.graphics.draw(spritesheet, BACK,800, VIRTUAL_HEIGHT / 2 - 60)
+    end
 
     result = yut1 + yut2 + yut3 + yut4
 
@@ -23,10 +53,30 @@ end
 
 function Yut:render()
 
-    love.graphics.printf(yut1, 200, VIRTUAL_HEIGHT / 2 - 60 , VIRTUAL_WIDTH, 'center')
-    love.graphics.printf(yut2, 250, VIRTUAL_HEIGHT / 2 - 60 , VIRTUAL_WIDTH, 'center')
-    love.graphics.printf(yut3, 300, VIRTUAL_HEIGHT / 2 - 60 , VIRTUAL_WIDTH, 'center')
-    love.graphics.printf(yut4, 350, VIRTUAL_HEIGHT / 2 - 60 , VIRTUAL_WIDTH, 'center')
+    if yut1 == 0 then
+        love.graphics.draw(spritesheet, FRONT, 650, VIRTUAL_HEIGHT / 2 - 60)
+    else
+        love.graphics.draw(spritesheet, BACKDO,650, VIRTUAL_HEIGHT / 2 - 60)
+    end
+
+    if yut2 == 0 then
+        love.graphics.draw(spritesheet, FRONT,700, VIRTUAL_HEIGHT / 2 - 60)
+    else
+        love.graphics.draw(spritesheet, BACK,700, VIRTUAL_HEIGHT / 2 - 60)
+    end
+
+    if yut3 == 0 then
+        love.graphics.draw(spritesheet, FRONT,750, VIRTUAL_HEIGHT / 2 - 60)
+    else
+        love.graphics.draw(spritesheet, BACK,750, VIRTUAL_HEIGHT / 2 - 60)
+    end
+
+    if yut4 == 0 then
+        love.graphics.draw(spritesheet, FRONT,800, VIRTUAL_HEIGHT / 2 - 60)
+    else
+        love.graphics.draw(spritesheet, BACK,800, VIRTUAL_HEIGHT / 2 - 60)
+    end
+
 
     if result == 1 then
         if yut1 == 1 then

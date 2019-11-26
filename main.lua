@@ -59,11 +59,37 @@ function love.keypressed(key)
     end
 end
 
+-- global key pressed function
+function love.keyboard.wasPressed(key)
+    if (love.keyboard.keysPressed[key]) then
+        return true
+    else
+        return false
+    end
+end
+
+-- global key released function
+function love.keyboard.wasReleased(key)
+    if (love.keyboard.keysReleased[key]) then
+        return true
+    else
+        return false
+    end
+end
+
+
+-- called whenever a key is released
+function love.keyreleased(key)
+    love.keyboard.keysReleased[key] = true
+end
+
+
 
 -- called every frame, with dt passed in as delta in time since last frame
 function love.update(dt)
     Board:update(dt)
-    
+    love.keyboard.keysPressed = {}
+    love.keyboard.keysReleased = {}
 end
 
 
@@ -77,13 +103,13 @@ function love.draw()
 
     love.graphics.setFont(mid_font)
 
-    love.graphics.printf('Hold Enter to Mix', 300, 100 , VIRTUAL_WIDTH, 'center')
+    love.graphics.printf('Hold Space to Mix', 300, 100 , VIRTUAL_WIDTH, 'center')
     
     local c = 0
     love.graphics.setFont(big_font)
     Board:render()
 
-    if love.keyboard.isDown('return') then
+    if love.keyboard.isDown('space') then
         Yut:mix()
     else
         c = 1
