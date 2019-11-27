@@ -1,15 +1,5 @@
 Board = Class{}
 
-function Board:init()
-
-end
-
-
-function Board:update()
-
-
-end
-
 function Board:render()
     love.graphics.rectangle('line', 50, 50, 500, 500)
     love.graphics.line(50,50,550,550)
@@ -55,6 +45,4 @@ function Board:render()
     love.graphics.circle('fill',216,383,10)
     love.graphics.circle('fill',133,466,10)
     
-    
-
 end

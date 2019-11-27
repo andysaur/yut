@@ -48,6 +48,8 @@ function Yut:mix()
 
     result = yut1 + yut2 + yut3 + yut4
 
+    return result
+
 end
 
 
