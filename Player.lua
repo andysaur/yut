@@ -5,15 +5,13 @@ Player = Class{}
 local moving_speed = 70
 
 yut = Yut()
+
 malsprite = love.graphics.newImage('graphics/Mal.png')
+
 tiles={}
+
 WHITE = love.graphics.newQuad(0,32,32,32,malsprite:getDimensions())
 BLACK = love.graphics.newQuad(0,0,32,32,malsprite:getDimensions())
-
-
-
-
-
 
 function Player:init(x, y)
 
@@ -24,9 +22,10 @@ end
 
 function Player:update(i)
 
-    m = i
+    count = yut:mix()
+    
 
-    self.y = self.y - (100 * m)
+    
     
 
 end

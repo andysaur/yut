@@ -5,7 +5,7 @@ require 'Board'
 require 'Player'
 require 'Yut'
 
-VIRTUAL_WIDTH = 900
+VIRTUAL_WIDTH = 1000
 VIRTUAL_HEIGHT = 600
 
 -- actual window resolution
@@ -25,12 +25,11 @@ love.graphics.setDefaultFilter('nearest', 'nearest')
 
 -- an object to contain our board data
 board = Board()
-
-
+yut = Yut()
 
 -- setting up the fonts
 small_font = love.graphics.newFont('fonts/font.ttf', 8)
-mid_font = love.graphics.newFont('fonts/font.ttf', 16)
+mid_font = love.graphics.newFont('fonts/font.ttf', 30)
 big_font = love.graphics.newFont('fonts/font.ttf', 50)
 
 -- performs initialization of all objects and data needed by program
@@ -88,14 +87,7 @@ function love.keyboard.wasPressed(key)
     end
 end
 
--- global key released function
-function love.keyboard.wasReleased(key)
-    if (love.keyboard.keysReleased[key]) then
-        return true
-    else
-        return false
-    end
-end
+
 
 
 -- called whenever a key is released
@@ -125,24 +117,28 @@ function love.draw()
 
     love.graphics.printf('Hold Space to Mix', 300, 100 , VIRTUAL_WIDTH, 'center')
     
-    local c = 0
     
     love.graphics.setFont(big_font)
     Board:render()
 
 
-
     if love.keyboard.isDown('space') then
-        i = Yut:mix()
-    else
-        c = 1
+       Yut:mix()
     end
 
-    if c == 1 then
+    if love.keyreleased('space') then
         Yut:render()
     end
 
+    love.graphics.setFont(mid_font)
+    
+    --if c == 0 then
+        --Yut:get_result()
+        --Yut:render()
+    --end
+
     Player:render()
+ 
     -- end virtual resolution
     push:apply('end')
 end
