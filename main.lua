@@ -27,31 +27,6 @@ love.graphics.setDefaultFilter('nearest', 'nearest')
 board = Board()
 
 
-white1=Player{}
-white1.x = P1_DEFAULT
-white1.y = WHITEHEIGHT_DEFAULT
-white2=Player{}
-white2.x = P2_DEFAULT
-white2.y = WHITEHEIGHT_DEFAULT
-white3=Player{}
-white3.x= P3_DEFAULT
-white3.y = WHITEHEIGHT_DEFAULT
-white4=Player{}
-white4.x = P4_DEFAULT
-white4.y = WHITEHEIGHT_DEFAULT
-
-black1=Player{}
-black1.x = P1_DEFAULT
-black1.y = BLACKHEIGHT_DEFAULT
-black2=Player{}
-black2.x = P2_DEFAULT
-black2.y = BLACKHEIGHT_DEFAULT
-black3=Player{}
-black3.x = P3_DEFAULT
-black3.y = BLACKHEIGHT_DEFAULT
-black4=Player{}
-black4.x = P4_DEFAULT
-black4.y = BLACKHEIGHT_DEFAULT
 
 -- setting up the fonts
 small_font = love.graphics.newFont('fonts/font.ttf', 8)
@@ -70,9 +45,18 @@ function love.load()
 
     love.window.setTitle('Game of YUT')
 
-    player1_1 = Player(525, 525, 50, 50)
 
     gameState = 'start'
+
+    black1=Player(P1_DEFAULT, BLACKHEIGHT_DEFAULT)
+    black2=Player(P2_DEFAULT, BLACKHEIGHT_DEFAULT)
+    black3=Player(P3_DEFAULT, BLACKHEIGHT_DEFAULT)
+    black4=Player(P4_DEFAULT, BLACKHEIGHT_DEFAULT)
+
+    white1=Player(P1_DEFAULT, WHITEHEIGHT_DEFAULT)
+    white2=Player(P2_DEFAULT, WHITEHEIGHT_DEFAULT)
+    white3=Player(P3_DEFAULT, WHITEHEIGHT_DEFAULT)
+    white4=Player(P4_DEFAULT, WHITEHEIGHT_DEFAULT)
 
     
 end
@@ -136,7 +120,6 @@ function love.draw()
     -- clear screen using Mario background blue
     love.graphics.clear(108/255, 140/255, 255/255, 255/255)
 
-    player1_1:render()
 
     love.graphics.setFont(mid_font)
 
@@ -148,15 +131,6 @@ function love.draw()
     Board:render()
 
 
-    love.graphics.draw(malsprite, WHITE, white1.x, white1.y)
-    love.graphics.draw(malsprite, WHITE, white2.x, white2.y)
-    love.graphics.draw(malsprite, WHITE, white3.x, white3.y)
-    love.graphics.draw(malsprite, WHITE, white4.x, white4.y)
-
-    love.graphics.draw(malsprite, BLACK, black1.x, black1.y)
-    love.graphics.draw(malsprite, BLACK, black2.x, black2.y)
-    love.graphics.draw(malsprite, BLACK, black3.x, black3.y)
-    love.graphics.draw(malsprite, BLACK, black4.x, black4.y)
 
     if love.keyboard.isDown('space') then
         i = Yut:mix()
@@ -168,7 +142,7 @@ function love.draw()
         Yut:render()
     end
 
-
+    Player:render()
     -- end virtual resolution
     push:apply('end')
 end
