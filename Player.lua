@@ -28,6 +28,6 @@ end
 
 
 function Player:render()
-    
+    --test
     
 end
