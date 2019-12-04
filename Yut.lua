@@ -1,11 +1,9 @@
 Yut = Class{}
 
-yut1 = 1
-yut2 = 1
-yut3 = 0
-yut4 = 0
-
-count = 1
+spritesheet = love.graphics.newImage('graphics/Yut.png')
+tiles = {}
+FRONT = love.graphics.newQuad(0,0,64,64,spritesheet:getDimensions())
+BACK = love.graphics.newQuad(64,0,64,64,spritesheet:getDimensions())
 
 results = {}
 
@@ -13,126 +11,97 @@ for reset = 1, 9 do
     results[reset] = 0
 end
 
+count = 1
+
+mid_font = love.graphics.newFont('fonts/font.ttf', 30)
 results_font = love.graphics.newFont('fonts/font.ttf', 16)
 
-spritesheet = love.graphics.newImage('graphics/Yut.png')
-tiles = {}
-FRONT = love.graphics.newQuad(0,0,64,64,spritesheet:getDimensions())
-BACK = love.graphics.newQuad(64,0,64,64,spritesheet:getDimensions())
+function Yut:init()
 
+    self.result = 2
+
+end
 
 function Yut:mix()
-    fake1 = math.random(2) - 1
-    fake2 = math.random(2) - 1
-    fake3 = math.random(2) - 1
-    fake4 = math.random(2) - 1
 
-    if fake1 == 0 then
-        love.graphics.draw(spritesheet, FRONT, 650, VIRTUAL_HEIGHT / 2 - 100)
-    else
-        love.graphics.draw(spritesheet, BACK,650, VIRTUAL_HEIGHT / 2 - 100)
-    end
+    self.yut1 = math.random(2) - 1
+    self.yut2 = math.random(2) - 1
+    self.yut3 = math.random(2) - 1
+    self.yut4 = math.random(2) - 1
 
-    if fake2 == 0 then
-        love.graphics.draw(spritesheet, FRONT,700, VIRTUAL_HEIGHT / 2 - 100)
-    else
-        love.graphics.draw(spritesheet, BACK,700, VIRTUAL_HEIGHT / 2 - 100)
-    end
+    love.graphics.print('mixing', 680, VIRTUAL_HEIGHT / 2 - 100)
 
-    if fake3 == 0 then
-        love.graphics.draw(spritesheet, FRONT,750, VIRTUAL_HEIGHT / 2 - 100)
-    else
-        love.graphics.draw(spritesheet, BACK,750, VIRTUAL_HEIGHT / 2 - 100)
-    end
+    self.result = self.yut1 + self.yut2 + self.yut3 + self.yut4
 
-    if fake4 == 0 then
-        love.graphics.draw(spritesheet, FRONT,800, VIRTUAL_HEIGHT / 2 - 100)
-    else
-        love.graphics.draw(spritesheet, BACK,800, VIRTUAL_HEIGHT / 2 - 100)
-    end
-    --self.result = yut1 + yut2 + yut3 + yut4
+    --results[count] = self.result
+
 end
 
-function Yut:get_result()
+function Yut:again()
 
-    self.result = yut1 + yut2 + yut3 + yut4
-
-    results[count] = self.result
-
-    if Yut:again(self.result) == true then
+    if self.result == 0 or self.result == 4 then
         count = count + 1
-    end
-end
-
-function Yut:again(result)
-    if result == 4 or result == 0 then
         return true
     else
         return false
     end
+   
 end
-
 
 function Yut:render()
 
-    yut1 = math.random(2) - 1
-    yut2 = math.random(2) - 1
-    yut3 = math.random(2) - 1
-    yut4 = math.random(2) - 1
+    love.graphics.setFont(mid_font)
 
-    if yut1 == 0 then
+    if self.yut1 == 0 then
         love.graphics.draw(spritesheet, FRONT, 650, VIRTUAL_HEIGHT / 2 - 100)
-    else
+    elseif self.yut1 == 1 then
         love.graphics.draw(spritesheet, BACK,650, VIRTUAL_HEIGHT / 2 - 100)
     end
 
-    if yut2 == 0 then
+    if self.yut2 == 0 then
         love.graphics.draw(spritesheet, FRONT,700, VIRTUAL_HEIGHT / 2 - 100)
-    else
+    elseif self.yut2 == 1 then
         love.graphics.draw(spritesheet, BACK,700, VIRTUAL_HEIGHT / 2 - 100)
     end
 
-    if yut3 == 0 then
+    if self.yut3 == 0 then
         love.graphics.draw(spritesheet, FRONT,750, VIRTUAL_HEIGHT / 2 - 100)
-    else
+    elseif self.yut3 == 1 then
         love.graphics.draw(spritesheet, BACK,750, VIRTUAL_HEIGHT / 2 - 100)
     end
 
-    if yut4 == 0 then
+    if self.yut4 == 0 then
         love.graphics.draw(spritesheet, FRONT,800, VIRTUAL_HEIGHT / 2 - 100)
-    else
+    elseif self.yut4 == 1 then
         love.graphics.draw(spritesheet, BACK,800, VIRTUAL_HEIGHT / 2 - 100)
     end
 
-    result = yut1+yut2+yut3+yut4
-    if result == 1 then
+    if self.result == 1 then
         love.graphics.printf('Do', 300, VIRTUAL_HEIGHT / 2 - 16 , VIRTUAL_WIDTH, 'center')
     end
 
-    if result == 2 then
-        
+    if self.result == 2 then
         love.graphics.printf('Gae', 300, VIRTUAL_HEIGHT / 2 - 16, VIRTUAL_WIDTH, 'center')
-        
     end
 
-    if result == 3 then
-        
+    if self.result == 3 then
         love.graphics.printf('Gul', 300, VIRTUAL_HEIGHT / 2 - 16 , VIRTUAL_WIDTH, 'center')
-        
     end
 
-    if result == 4 then
+    if self.result == 4 then
         love.graphics.printf('Yut!', 300, VIRTUAL_HEIGHT / 2 - 16 , VIRTUAL_WIDTH, 'center')
         love.graphics.printf('Throw Again', 300, VIRTUAL_HEIGHT / 2 + 25, VIRTUAL_WIDTH, 'center')
     end
 
-    if result == 0 then
+    if self.result == 0 then
         love.graphics.printf('Mo!', 300, VIRTUAL_HEIGHT / 2 - 16 , VIRTUAL_WIDTH, 'center')
         love.graphics.printf('Throw Again', 300, VIRTUAL_HEIGHT / 2 + 25, VIRTUAL_WIDTH, 'center')
     end
 
 
+
     love.graphics.setFont(results_font)
+
     love.graphics.printf('1: ', 450, 300 , VIRTUAL_WIDTH, 'center')
     love.graphics.printf(results[1], 470, 300 , VIRTUAL_WIDTH, 'center')
     love.graphics.printf('2: ', 450, 320 , VIRTUAL_WIDTH, 'center')
@@ -151,5 +120,5 @@ function Yut:render()
     love.graphics.printf(results[8], 470, 440 , VIRTUAL_WIDTH, 'center')
     love.graphics.printf('9: ', 450, 460 , VIRTUAL_WIDTH, 'center')
     love.graphics.printf(results[9], 470, 460 , VIRTUAL_WIDTH, 'center')
-    love.graphics.printf(count, 470, 480 , VIRTUAL_WIDTH, 'center')
+
 end

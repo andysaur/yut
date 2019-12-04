@@ -23,7 +23,7 @@ BLACKHEIGHT_DEFAULT = VIRTUAL_HEIGHT / 2 + 150
 -- makes upscaling look pixel-y instead of blurry
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
--- an object to contain our board data
+
 board = Board()
 yut = Yut()
 
@@ -78,6 +78,7 @@ function love.keypressed(key)
     end
 end
 
+
 -- global key pressed function
 function love.keyboard.wasPressed(key)
     if (love.keyboard.keysPressed[key]) then
@@ -100,7 +101,15 @@ end
 -- called every frame, with dt passed in as delta in time since last frame
 function love.update(dt)
     love.keyboard.keysPressed = {}
+
     love.keyboard.keysReleased = {}
+
+    if love.keyboard.wasPressed('return') then
+        black1:move(dt)
+    end
+
+
+
 end
 
 local i = 0
@@ -120,24 +129,14 @@ function love.draw()
     
     love.graphics.setFont(big_font)
     Board:render()
-
+    Player:render()
 
     if love.keyboard.isDown('space') then
-       Yut:mix()
-    end
-
-    if love.keyreleased('space') then
+        Yut:mix()
+    else
         Yut:render()
     end
 
-    love.graphics.setFont(mid_font)
-    
-    --if c == 0 then
-        --Yut:get_result()
-        --Yut:render()
-    --end
-
-    Player:render()
  
     -- end virtual resolution
     push:apply('end')
