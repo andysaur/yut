@@ -20,6 +20,8 @@ P4_DEFAULT = 800
 WHITEHEIGHT_DEFAULT = VIRTUAL_HEIGHT / 2 + 100
 BLACKHEIGHT_DEFAULT = VIRTUAL_HEIGHT / 2 + 150
 
+spacepressed = false
+
 -- makes upscaling look pixel-y instead of blurry
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
@@ -56,6 +58,8 @@ function love.load()
     white2=Player(P2_DEFAULT, WHITEHEIGHT_DEFAULT)
     white3=Player(P3_DEFAULT, WHITEHEIGHT_DEFAULT)
     white4=Player(P4_DEFAULT, WHITEHEIGHT_DEFAULT)
+
+    result = 0
 
     
 end
@@ -97,18 +101,35 @@ function love.keyreleased(key)
 end
 
 
-
 -- called every frame, with dt passed in as delta in time since last frame
 function love.update(dt)
     love.keyboard.keysPressed = {}
 
     love.keyboard.keysReleased = {}
 
-    if love.keyboard.wasPressed('return') then
-        black1:move(dt)
+  
+    if love.keyboard.isDown('space') then
+        result = Yut:mix()
+        spacepressed = true
+    else
+        spacepressed = false
+        if gameState ~= 'start' then
+            gameState = 'movestate'
+        end
     end
 
+    if spacepressed == false then
+        yut:again()
+    end
 
+    
+    if gameState == 'movestate' then
+ 
+        black1:move(result)
+        gameState = 'readystate'
+
+    end
+    
 
 end
 
@@ -130,12 +151,8 @@ function love.draw()
     love.graphics.setFont(big_font)
     Board:render()
     Player:render()
+    Yut:render()
 
-    if love.keyboard.isDown('space') then
-        Yut:mix()
-    else
-        Yut:render()
-    end
 
  
     -- end virtual resolution

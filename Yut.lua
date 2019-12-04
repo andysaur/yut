@@ -18,7 +18,7 @@ results_font = love.graphics.newFont('fonts/font.ttf', 16)
 
 function Yut:init()
 
-    self.result = 2
+    self.result = 0
 
 end
 
@@ -33,7 +33,10 @@ function Yut:mix()
 
     self.result = self.yut1 + self.yut2 + self.yut3 + self.yut4
 
-    --results[count] = self.result
+    results[count] = self.result
+
+    return self.result
+
 
 end
 

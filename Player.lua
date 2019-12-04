@@ -13,16 +13,35 @@ tiles={}
 WHITE = love.graphics.newQuad(0,32,32,32,malsprite:getDimensions())
 BLACK = love.graphics.newQuad(0,0,32,32,malsprite:getDimensions())
 
+
+
 function Player:init(x, y)
     self.x = x
     self.y = y
     self.dy = 100
 end
 
-function Player:move()
+function Player:move(result)
 
+    --if self.y == WHITEHEIGHT_DEFAULT then
+        --self.y = 550
+        --self.x = 550
+    --elseif self.y == BLACKHEIGHT_DEFAULT then
+        --self.y= 500
+        --self.x= 550
+    --end
 
-    self.y = self.dy * yut.result
+    
+
+    if result > 0 and self.y > 50 then
+        self.y = self.y - self.dy
+        result = result - 1
+    end
+    
+    --self.y = self.y - self.dy * result
+    if Player:at_corner() then
+        self.dy = 0
+    end
 
     
 
