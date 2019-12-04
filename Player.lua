@@ -5,6 +5,11 @@ Player = Class{}
 local moving_speed = 70
 
 yut = Yut()
+malsprite = love.graphics.newImage('graphics/Mal.png')
+tiles={}
+WHITE = love.graphics.newQuad(0,32,32,32,malsprite:getDimensions())
+BLACK = love.graphics.newQuad(0,0,32,32,malsprite:getDimensions())
+
 
 function Player:init(x, y, width, height)
 
@@ -12,6 +17,7 @@ function Player:init(x, y, width, height)
     self.y = y
     self.width = width
     self.height = height
+    
 
     
 
@@ -28,6 +34,5 @@ end
 
 
 function Player:render()
-    --test
-    
+    love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
 end
